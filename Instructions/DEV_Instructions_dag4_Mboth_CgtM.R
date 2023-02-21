@@ -1,0 +1,85 @@
+list(
+  truth=list(
+    n=100000
+  ),
+  measurement=list(
+    "measM_both"=list(
+      measFn = "measurement1",
+      options=list(
+        cohorts=list(
+          "younger"=list(
+            obs=c("V","M"),
+            n=2500
+          ),
+          "older"=list(
+            obs=c("M","Y"),
+            n=2500
+          )
+        )
+      )
+    )
+  ),
+  distances=list(
+    "euclidian_spec"=list(
+      distanceFn="euclidian",
+      options=list(
+        vars=c("M"),
+        distanceMetric="unweighted"
+      )
+    )
+  ),
+  combining=list(
+    "detMatch_10Matches"=list(
+      combFn="deterministicMatch",
+      options=list(
+        nMatches=10,
+        nBootstraps=1,
+        distance="euclidian_spec"
+      )
+    ),
+    "detMatch_30Matches"=list(
+      combFn="deterministicMatch",
+      options=list(
+        nMatches=30,
+        nBootstraps=1,
+        distance="euclidian_spec"
+      )
+    )
+  ),
+  analysis=list(
+    "lm_V"=list(
+      analysisFn="lm",
+      options=list(
+        formula="Y~V"
+      )
+    ),
+    "lmcluster_V"=list(
+      analysisFn="lmcluster",
+      options=list(
+        formula="Y~V",
+        weighted=FALSE,
+        clusterVar="older"
+      )
+    ),
+    "lmMI_V"=list(
+      analysisFn="lm_MIpool",
+      options=list(
+        formula="Y~V",
+        clusterVar="older"
+      )
+    )
+  ),
+  dags = list(
+    "dag_dromedary_strongconf_CgtM"=list(
+      measurement=list(
+        "measM_both" = c("lm_V",
+                          "lmcluster_V",
+                          "lmMI_V")
+      ),
+      combining = c("detMatch_10Matches",
+                    "detMatch_30Matches")
+    )
+  ),
+  effect = list(outcomes="Y",
+                do="V")
+)
