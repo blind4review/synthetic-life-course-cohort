@@ -14,7 +14,7 @@ list(
     simOptions = list(
       coefs=list(
         U=0.05,
-        C=1
+        C=0.95
       )
     )
   ),
@@ -34,7 +34,7 @@ list(
     simOptions = list(
       coefs=list(
         U=0.05,
-        C=1,
+        C=0.65,
         M=0.5
       )
     )

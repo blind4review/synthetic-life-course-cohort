@@ -14,7 +14,7 @@ list(
     simOptions = list(
       coefs=list(
         U=0.05,
-        C=0.65
+        C=0.6
       )
     )
   ),
