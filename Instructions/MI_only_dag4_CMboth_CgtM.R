@@ -93,7 +93,7 @@ list(
     )
   ),
   dags = list(
-    "dag_dromedary_strongconf_CgtM"=list(
+    "dag_dromedary_strongconf_CgtM_newParams"=list(
       measurement=list(
         "measCM_both" = c("lmMI_VC")
       ),
